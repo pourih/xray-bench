@@ -1,6 +1,6 @@
 # Xray-Bench (xBench)
 
-A high-concurrency proxy benchmarking engine and modern desktop GUI for filtering, testing, and tournament-ranking large lists of V2Ray/Xray configurations.
+Proxy benchmarking engine and modern desktop GUI for filtering, testing, and ranking large lists of V2Ray configurations.
 
 It ingests nodes from subscription links, local lists, or its internal SQLite cache, bundles them into batched `xray-core` instances, and validates them across two stages: **HTTP ping & Google geo-localization verification**, followed by an **elimination-based speed tournament**. Results are saved to `results/` and can be automatically published to GitHub.
 
@@ -8,7 +8,7 @@ It ingests nodes from subscription links, local lists, or its internal SQLite ca
 
 ### 🔗 Live Subscription Links
 
-Download speed tested & tournament-ranked:
+Download speed tested & ranked:
 ```text
 https://raw.githubusercontent.com/pourih/xray-bench/refs/heads/main/results/nodes_speed.txt
 ```

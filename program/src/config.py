@@ -15,6 +15,7 @@ load_dotenv()
 class GeneralConfig(BaseModel):
     node_prefix: str = "[xBench]"
     log_level: str = "INFO"
+    theme: str = "dark"
 
 
 class PathsConfig(BaseModel):

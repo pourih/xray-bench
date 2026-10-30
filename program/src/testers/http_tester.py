@@ -101,7 +101,7 @@ async def fetch_nodes_from_sources(
             if isinstance(res, list):
                 raw_nodes.extend(res)
 
-    elif source_type == "file":
+    elif source_type in ("file", "custom"):
         in_file = Path(file_path or "data/custom_nodes.txt")
         if not in_file.is_file():
             if event_bus:
@@ -115,6 +115,33 @@ async def fetch_nodes_from_sources(
                     parsed = parse_uri(line_str)
                     if parsed:
                         raw_nodes.append(parsed)
+
+    elif source_type == "http-output":
+        http_file = Path(file_path or "results/nodes_http.txt")
+        if not http_file.is_file():
+            http_file = Path("../results/nodes_http.txt")
+        if not http_file.is_file():
+            if event_bus:
+                event_bus.log(f"HTTP output file not found: {http_file}", level="WARNING")
+            return []
+
+        with open(http_file, "r", encoding="utf-8", errors="ignore") as f:
+            for line in f:
+                line_str = line.strip()
+                if line_str and not line_str.startswith("#"):
+                    parsed = parse_uri(line_str)
+                    if parsed:
+                        raw_nodes.append(parsed)
+
+    elif source_type == "db":
+        db_file = Path("data/nodes_cache.db")
+        if db_file.is_file():
+            db_inst = Database(str(db_file))
+            for rec in db_inst.get_active_nodes():
+                parsed = parse_uri(rec.raw_uri)
+                if parsed:
+                    raw_nodes.append(parsed)
+            db_inst.close()
 
     # Deduplicate by node_id and filter against blacklist & Xray core compatibility
     seen_ids: Set[str] = set()

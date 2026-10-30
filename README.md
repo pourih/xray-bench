@@ -4,6 +4,18 @@ A tool for testing, filtering, and ranking large lists of V2Ray proxies.
 
 It pulls configs from subscription links or local files, compiles them into batched `xray-core` configs (40 nodes per process by default), and runs them through two stages: an initial HTTP ping/geo-check and an elimination speed tournament. Results are saved to `results/` and can be auto-pushed back to GitHub.
 
+### 🔗 Live Subscription Link
+
+Download speed tested & ranked:
+```text
+https://raw.githubusercontent.com/pourih/xray-bench/refs/heads/main/results/nodes_speed.txt
+```
+
+HTTP tested & ranked:
+```text
+https://raw.githubusercontent.com/pourih/xray-bench/refs/heads/main/results/nodes_http.txt
+```
+
 ### What it does
 
 - **Protocols:** VMess, VLESS (Reality, WS, gRPC, TCP, HTTPUpgrade, XHTTP), Trojan, Shadowsocks, SOCKS, and WireGuard.

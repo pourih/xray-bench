@@ -219,7 +219,10 @@ async def run_http_test_cli(args: argparse.Namespace, config: AppConfig, event_b
             commit_prefix=config.github.commit_message_prefix,
             event_bus=event_bus,
         )
-        await publisher.publish_file(config.paths.output_http_file)
+        await publisher.publish_file(
+            config.paths.output_http_file,
+            target_repo_path=f"results/{Path(config.paths.output_http_file).name}",
+        )
 
 
 async def run_speed_test_cli(args: argparse.Namespace, config: AppConfig, event_bus: EventBus) -> None:
@@ -320,7 +323,10 @@ async def run_speed_test_cli(args: argparse.Namespace, config: AppConfig, event_
             commit_prefix=config.github.commit_message_prefix,
             event_bus=event_bus,
         )
-        await publisher.publish_file(config.paths.output_speed_file)
+        await publisher.publish_file(
+            config.paths.output_speed_file,
+            target_repo_path=f"results/{Path(config.paths.output_speed_file).name}",
+        )
 
 
 def run_stats_cli(config: AppConfig, event_bus: EventBus) -> None:

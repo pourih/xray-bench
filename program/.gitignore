@@ -7,7 +7,9 @@ bin/
 # Databases
 data/*.db
 data/*.sqlite
+data/*.bak*
 *.db
+*.bak*
 
 # Python & testing
 __pycache__/

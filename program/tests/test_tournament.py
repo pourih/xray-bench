@@ -20,6 +20,7 @@ def mock_db_and_engine():
     db = Database(db_path)
     config = AppConfig()
     config.paths.database_path = db_path
+    config.paths.output_speed_file = Path("data/test_nodes_speed.txt")
     config.speed_test.min_speed_mbps = 1.0
 
     geo_service = GeoLookupService(db=db, check_google=False)
@@ -40,6 +41,10 @@ def mock_db_and_engine():
             p.unlink(missing_ok=True)
         except OSError:
             pass
+    try:
+        Path("data/test_nodes_speed.txt").unlink(missing_ok=True)
+    except OSError:
+        pass
 
 
 def test_tournament_exact_tier_ordering(mock_db_and_engine):

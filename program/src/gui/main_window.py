@@ -4,7 +4,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Optional
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QIcon, QPixmap
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import (
     QApplication,
     QButtonGroup,
@@ -71,27 +71,12 @@ class MainWindow(QMainWindow):
         sidebar_layout.setContentsMargins(0, 0, 0, 16)
         sidebar_layout.setSpacing(4)
 
-        # Brand Header (App Icon + xBench Logo)
+        # Brand Header (xBench Logo)
         brand_container = QWidget()
         brand_container.setStyleSheet("background-color: transparent;")
         brand_layout = QHBoxLayout(brand_container)
-        brand_layout.setContentsMargins(16, 20, 16, 16)
-        brand_layout.setSpacing(10)
+        brand_layout.setContentsMargins(18, 20, 16, 16)
         brand_layout.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
-
-        icon_path = self._resolve_icon_path()
-        if icon_path:
-            logo_label = QLabel()
-            logo_label.setStyleSheet("background-color: transparent;")
-            pixmap = QPixmap(str(icon_path)).scaled(
-                28,
-                28,
-                Qt.AspectRatioMode.KeepAspectRatio,
-                Qt.TransformationMode.SmoothTransformation,
-            )
-            logo_label.setPixmap(pixmap)
-            logo_label.setFixedSize(28, 28)
-            brand_layout.addWidget(logo_label)
 
         self.brand_title_label = QLabel()
         self.brand_title_label.setObjectName("sidebarTitle")

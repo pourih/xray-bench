@@ -231,12 +231,18 @@ QPushButton.btn-danger:hover {
     background-color: #dc2626;
 }
 
+QPushButton.btn-danger:disabled {
+    background-color: #2b1f22;
+    color: #7f555c;
+    border: 1px solid #3d282d;
+}
+
 /* Progress Bars */
 QProgressBar {
-    background-color: #23252d;
-    border: none;
+    background-color: #16181f;
+    border: 1px solid #232530;
     border-radius: 6px;
-    height: 10px;
+    height: 8px;
     text-align: center;
     color: transparent;
 }
@@ -473,43 +479,67 @@ QScrollArea > QWidget > QWidget {
 
 /* Scrollbars */
 QScrollBar:vertical {
-    background-color: transparent;
+    background-color: #121316;
     width: 8px;
     margin: 0px;
+    border: none;
+}
+
+QScrollBar::track:vertical {
+    background-color: #18191e;
+    border-radius: 4px;
 }
 
 QScrollBar::handle:vertical {
-    background-color: #2f3240;
+    background-color: #2b2e3b;
     min-height: 24px;
     border-radius: 4px;
 }
 
 QScrollBar::handle:vertical:hover {
-    background-color: #4b4f63;
+    background-color: #3f4357;
 }
 
 QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
     height: 0px;
+    background: none;
+    border: none;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
 }
 
 QScrollBar:horizontal {
-    background-color: transparent;
+    background-color: #121316;
     height: 8px;
     margin: 0px;
+    border: none;
+}
+
+QScrollBar::track:horizontal {
+    background-color: #18191e;
+    border-radius: 4px;
 }
 
 QScrollBar::handle:horizontal {
-    background-color: #2f3240;
+    background-color: #2b2e3b;
     min-width: 24px;
     border-radius: 4px;
 }
 
 QScrollBar::handle:horizontal:hover {
-    background-color: #4b4f63;
+    background-color: #3f4357;
 }
 
 QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
     width: 0px;
+    background: none;
+    border: none;
+}
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: none;
 }
 """
 
@@ -580,7 +610,7 @@ QFrame.card {
 
 QFrame.card-highlight {
     background-color: #ffffff;
-    border: 1px solid #c7d2fe;
+    border: 1px solid #e2e8f0;
     border-radius: 12px;
 }
 
@@ -734,12 +764,18 @@ QPushButton.btn-danger:hover {
     background-color: #dc2626;
 }
 
+QPushButton.btn-danger:disabled {
+    background-color: #fee2e2;
+    color: #fca5a5;
+    border: 1px solid #fecaca;
+}
+
 /* Progress Bars */
 QProgressBar {
-    background-color: #e2e8f0;
-    border: none;
+    background-color: #f1f5f9;
+    border: 1px solid #e2e8f0;
     border-radius: 6px;
-    height: 10px;
+    height: 8px;
     text-align: center;
     color: transparent;
 }

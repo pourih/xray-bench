@@ -88,7 +88,7 @@ class SourcesView(QWidget):
         btn_reload.clicked.connect(self.load_all_files)
         footer_row.addWidget(btn_reload)
 
-        btn_save = QPushButton("💾 Save All Files")
+        btn_save = QPushButton("Save All Files")
         btn_save.setProperty("class", "btn-primary")
         btn_save.clicked.connect(self.save_all_files)
         footer_row.addWidget(btn_save)

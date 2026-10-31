@@ -141,9 +141,10 @@ class DashboardView(QWidget):
         self.btn_run_speed.clicked.connect(self._on_start_speed)
         actions_row.addWidget(self.btn_run_speed)
 
-        self.btn_stop = QPushButton("⏹ Stop")
+        self.btn_stop = QPushButton("■ Stop")
         self.btn_stop.setProperty("class", "btn-danger")
         self.btn_stop.setEnabled(False)
+        self.btn_stop.setCursor(Qt.CursorShape.ArrowCursor)
         self.btn_stop.clicked.connect(self._on_stop)
         actions_row.addWidget(self.btn_stop)
 
@@ -166,6 +167,7 @@ class DashboardView(QWidget):
         self.progress_bar = QProgressBar()
         self.progress_bar.setRange(0, 100)
         self.progress_bar.setValue(0)
+        self.progress_bar.setVisible(False)
         deck_layout.addWidget(self.progress_bar)
 
         layout.addWidget(deck_card)
@@ -228,8 +230,9 @@ class DashboardView(QWidget):
         source = self.combo_source.currentData()
         limit = int(self.input_limit.text().strip()) if self.input_limit.text().strip().isdigit() else 0
         push = self.chk_push.isChecked()
-        self.set_running_state(True, "HTTP TEST IN PROGRESS")
+        self.progress_bar.setVisible(True)
         self.progress_bar.setValue(0)
+        self.set_running_state(True, "HTTP TEST IN PROGRESS")
         self.lbl_active_info.setText("⏳ Initializing Xray core & fetching candidate nodes...")
         self.start_http_requested.emit(source, limit, push)
 
@@ -237,8 +240,9 @@ class DashboardView(QWidget):
         source = self.combo_source.currentData()
         limit = int(self.input_limit.text().strip()) if self.input_limit.text().strip().isdigit() else 0
         push = self.chk_push.isChecked()
-        self.set_running_state(True, "SPEED TOURNAMENT IN PROGRESS")
+        self.progress_bar.setVisible(True)
         self.progress_bar.setValue(0)
+        self.set_running_state(True, "SPEED TOURNAMENT IN PROGRESS")
         self.lbl_active_info.setText("⏳ Preparing candidate nodes for Speed Tournament...")
         self.start_speed_requested.emit(source, limit, push)
 
@@ -251,13 +255,17 @@ class DashboardView(QWidget):
         self.btn_run_http.setEnabled(not is_running)
         self.btn_run_speed.setEnabled(not is_running)
         self.btn_stop.setEnabled(is_running)
+        self.btn_stop.setCursor(Qt.CursorShape.PointingHandCursor if is_running else Qt.CursorShape.ArrowCursor)
         self.combo_source.setEnabled(not is_running)
         self.input_limit.setEnabled(not is_running)
 
         if is_running:
+            self.progress_bar.setVisible(True)
             self.status_pill.setText(status_text)
             self.status_pill.setProperty("running", "true")
         else:
+            if self.progress_bar.value() == 0 or status_text == "IDLE":
+                self.progress_bar.setVisible(False)
             self.status_pill.setText("IDLE")
             self.status_pill.setProperty("running", "false")
         self.status_pill.style().unpolish(self.status_pill)

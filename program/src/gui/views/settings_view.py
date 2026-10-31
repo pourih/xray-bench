@@ -174,7 +174,7 @@ class SettingsView(QWidget):
         footer.addWidget(self.lbl_status)
         footer.addStretch()
 
-        btn_save = QPushButton("💾 Save Configuration")
+        btn_save = QPushButton("Save Configuration")
         btn_save.setProperty("class", "btn-primary")
         btn_save.clicked.connect(self.save_settings)
         footer.addWidget(btn_save)

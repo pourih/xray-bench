@@ -7,6 +7,11 @@ import sys
 from pathlib import Path
 from typing import Optional
 
+# Ensure program directory is in sys.path
+program_dir = Path(__file__).resolve().parent.parent.parent
+if str(program_dir) not in sys.path:
+    sys.path.insert(0, str(program_dir))
+
 # Ensure UTF-8 output on Windows consoles
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")

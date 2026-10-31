@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
+from typing import Optional
 
 # Ensure program directory is in sys.path
 program_dir = Path(__file__).resolve().parent.parent.parent
@@ -56,8 +57,10 @@ def main() -> None:
         app_icon = QIcon(str(icon_path))
         app.setWindowIcon(app_icon)
 
-    # Set Default Font
-    font = QFont("Segoe UI", 10)
+    # Set Default Font (cross-platform font cascade)
+    font = QFont()
+    font.setFamilies(["Segoe UI Variable Text", "Segoe UI", "Inter", "Cantarell", "Noto Sans", "Ubuntu", "DejaVu Sans", "sans-serif"])
+    font.setPointSize(10)
     font.setStyleHint(QFont.StyleHint.SansSerif)
     app.setFont(font)
 

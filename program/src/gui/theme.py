@@ -15,7 +15,7 @@ _RAW_DARK_STYLESHEET = """
 QWidget {
     background-color: #121316;
     color: #f3f4f6;
-    font-family: "Segoe UI Variable Text", "Segoe UI", -apple-system, sans-serif;
+    font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Inter", "Cantarell", "Noto Sans", "Ubuntu", sans-serif;
     font-size: 13px;
     selection-background-color: #6366f1;
     selection-color: #ffffff;
@@ -549,7 +549,7 @@ _RAW_LIGHT_STYLESHEET = """
 QWidget {
     background-color: #f8fafc;
     color: #0f172a;
-    font-family: "Segoe UI Variable Text", "Segoe UI", -apple-system, sans-serif;
+    font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Inter", "Cantarell", "Noto Sans", "Ubuntu", sans-serif;
     font-size: 13px;
     selection-background-color: #4f46e5;
     selection-color: #ffffff;

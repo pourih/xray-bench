@@ -1,5 +1,6 @@
 """Tests for HttpLatencyTester two-phase pipeline."""
 import asyncio
+from pathlib import Path
 import pytest
 from unittest.mock import AsyncMock, MagicMock, patch
 
@@ -35,7 +36,7 @@ def test_two_phase_alive_filter_and_enrichment(tmp_path):
             config=config,
             db=db,
             geo_service=geo_service,
-            xray_binary="xray.exe",
+            xray_binary=Path("dummy_xray"),
         )
 
         nodes = [
@@ -144,7 +145,7 @@ def test_rolling_events_emitted(tmp_path):
             config=config,
             db=db,
             geo_service=geo_service,
-            xray_binary="xray.exe",
+            xray_binary=Path("dummy_xray"),
             event_bus=event_bus,
         )
 

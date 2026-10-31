@@ -4,7 +4,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Optional
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QIcon
+from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import (
     QApplication,
     QButtonGroup,
@@ -71,10 +71,36 @@ class MainWindow(QMainWindow):
         sidebar_layout.setContentsMargins(0, 0, 0, 16)
         sidebar_layout.setSpacing(4)
 
-        # Brand Title
-        title_label = QLabel("xBench")
-        title_label.setObjectName("sidebarTitle")
-        sidebar_layout.addWidget(title_label)
+        # Brand Header (App Icon + xBench Logo)
+        brand_container = QWidget()
+        brand_container.setStyleSheet("background-color: transparent;")
+        brand_layout = QHBoxLayout(brand_container)
+        brand_layout.setContentsMargins(16, 20, 16, 16)
+        brand_layout.setSpacing(10)
+        brand_layout.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+
+        icon_path = self._resolve_icon_path()
+        if icon_path:
+            logo_label = QLabel()
+            logo_label.setStyleSheet("background-color: transparent;")
+            pixmap = QPixmap(str(icon_path)).scaled(
+                28,
+                28,
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation,
+            )
+            logo_label.setPixmap(pixmap)
+            logo_label.setFixedSize(28, 28)
+            brand_layout.addWidget(logo_label)
+
+        self.brand_title_label = QLabel()
+        self.brand_title_label.setObjectName("sidebarTitle")
+        self.brand_title_label.setStyleSheet("background-color: transparent;")
+        self._update_brand_title()
+        brand_layout.addWidget(self.brand_title_label)
+        brand_layout.addStretch()
+
+        sidebar_layout.addWidget(brand_container)
 
         # Navigation Buttons Group
         self.nav_group = QButtonGroup(self)
@@ -93,11 +119,6 @@ class MainWindow(QMainWindow):
         sidebar_layout.addWidget(self.btn_nav_logs)
 
         sidebar_layout.addStretch()
-
-        # Sidebar footer info
-        self.lbl_sidebar_nodes = QLabel("Nodes in DB: --")
-        self.lbl_sidebar_nodes.setStyleSheet("color: #6b7280; font-size: 11px; padding: 0 16px;")
-        sidebar_layout.addWidget(self.lbl_sidebar_nodes)
 
         main_layout.addWidget(sidebar)
 
@@ -136,9 +157,18 @@ class MainWindow(QMainWindow):
         btn.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(page_index))
         return btn
 
+    def _update_brand_title(self) -> None:
+        """Render sidebar logo title with vibrant red 'x' and adaptive 'Bench'."""
+        bench_color = "#ffffff" if self.current_theme == "dark" else "#0f172a"
+        self.brand_title_label.setText(
+            f'<span style="color:#EF4444; font-size:21px; font-weight:800;">x</span>'
+            f'<span style="color:{bench_color}; font-size:21px; font-weight:800; letter-spacing:-0.5px;">Bench</span>'
+        )
+
     def _on_theme_changed(self, theme: str) -> None:
         """Handle theme change from settings."""
         self.current_theme = theme
+        self._update_brand_title()
 
     def _refresh_db_stats(self) -> None:
         """Query database for quick summary stats."""
@@ -162,7 +192,6 @@ class MainWindow(QMainWindow):
             self.view_dashboard.card_passed.set_value(f"{passed_http:,}", f"Passed ping")
             self.view_dashboard.card_speed.set_value(f"{max_speed:.2f}", f"Mbps peak")
             self.view_dashboard.card_dead.set_value(f"{dead_count:,}", f"3-Strike policy")
-            self.lbl_sidebar_nodes.setText(f"Active Nodes: {total_count:,}")
         except Exception:
             pass
 

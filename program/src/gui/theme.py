@@ -25,10 +25,11 @@ QMainWindow {
 }
 
 #sidebarTitle {
-    font-size: 19px;
+    font-size: 21px;
     font-weight: 800;
     color: #ffffff;
-    padding: 18px 16px 14px 16px;
+    background-color: transparent;
+    padding: 0px;
     letter-spacing: -0.5px;
 }
 
@@ -392,10 +393,11 @@ QMainWindow {
 }
 
 #sidebarTitle {
-    font-size: 19px;
+    font-size: 21px;
     font-weight: 800;
     color: #0f172a;
-    padding: 18px 16px 14px 16px;
+    background-color: transparent;
+    padding: 0px;
     letter-spacing: -0.5px;
 }
 

@@ -73,7 +73,7 @@ class NodesView(QWidget):
         filter_layout.setSpacing(12)
 
         lbl_search = QLabel("🔍")
-        lbl_search.setStyleSheet("font-size: 14px;")
+        lbl_search.setStyleSheet("background-color: transparent; font-size: 14px;")
         filter_layout.addWidget(lbl_search)
 
         self.input_search = QLineEdit()
@@ -82,7 +82,7 @@ class NodesView(QWidget):
         filter_layout.addWidget(self.input_search)
 
         self.lbl_count = QLabel("0 nodes")
-        self.lbl_count.setStyleSheet("color: #818cf8; font-weight: 600; font-size: 12px;")
+        self.lbl_count.setStyleSheet("background-color: transparent; color: #818cf8; font-weight: 600; font-size: 12px;")
         filter_layout.addWidget(self.lbl_count)
 
         layout.addWidget(filter_card)

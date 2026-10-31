@@ -72,27 +72,72 @@ QFrame.card-highlight {
 }
 
 /* Headers & Labels */
+QLabel {
+    background-color: transparent;
+}
+
 QLabel.heading-1 {
     font-size: 20px;
     font-weight: 700;
     color: #ffffff;
+    background-color: transparent;
 }
 
 QLabel.heading-2 {
     font-size: 15px;
     font-weight: 600;
     color: #e5e7eb;
+    background-color: transparent;
 }
 
 QLabel.label-muted {
     font-size: 12px;
     color: #9ca3af;
+    background-color: transparent;
 }
 
 QLabel.stat-value {
     font-size: 26px;
     font-weight: 800;
     color: #ffffff;
+    background-color: transparent;
+}
+
+/* Card & Banner Child Transparencies */
+QFrame.card QLabel,
+QFrame.card-highlight QLabel,
+#statCard QLabel,
+#activeBanner QLabel {
+    background-color: transparent;
+}
+
+QFrame.card QCheckBox,
+QFrame.card-highlight QCheckBox {
+    background-color: transparent;
+}
+
+/* Badge Pills */
+#statusPill {
+    background-color: #282a35;
+    color: #9ca3af;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+#statusPill[running="true"] {
+    background-color: #312e81;
+    color: #a5b4fc;
+}
+
+#streamCounter {
+    background-color: #23252d;
+    color: #9ca3af;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 600;
 }
 
 /* Primary Action Buttons */
@@ -271,6 +316,7 @@ QSpinBox {
 }
 
 QCheckBox {
+    background-color: transparent;
     color: #e5e7eb;
     font-weight: 500;
     spacing: 8px;
@@ -324,6 +370,16 @@ QTabBar::tab:hover:!selected {
     border: 1px solid #2b2f3e;
     border-radius: 8px;
     padding: 6px 12px;
+}
+
+/* ScrollArea Containers */
+QScrollArea {
+    background-color: transparent;
+    border: none;
+}
+
+QScrollArea > QWidget > QWidget {
+    background-color: transparent;
 }
 
 /* Scrollbars */
@@ -440,27 +496,72 @@ QFrame.card-highlight {
 }
 
 /* Headers & Labels */
+QLabel {
+    background-color: transparent;
+}
+
 QLabel.heading-1 {
     font-size: 20px;
     font-weight: 700;
     color: #0f172a;
+    background-color: transparent;
 }
 
 QLabel.heading-2 {
     font-size: 15px;
     font-weight: 600;
     color: #1e293b;
+    background-color: transparent;
 }
 
 QLabel.label-muted {
     font-size: 12px;
     color: #64748b;
+    background-color: transparent;
 }
 
 QLabel.stat-value {
     font-size: 26px;
     font-weight: 800;
     color: #0f172a;
+    background-color: transparent;
+}
+
+/* Card & Banner Child Transparencies */
+QFrame.card QLabel,
+QFrame.card-highlight QLabel,
+#statCard QLabel,
+#activeBanner QLabel {
+    background-color: transparent;
+}
+
+QFrame.card QCheckBox,
+QFrame.card-highlight QCheckBox {
+    background-color: transparent;
+}
+
+/* Badge Pills */
+#statusPill {
+    background-color: #e2e8f0;
+    color: #475569;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+#statusPill[running="true"] {
+    background-color: #e0e7ff;
+    color: #4338ca;
+}
+
+#streamCounter {
+    background-color: #f1f5f9;
+    color: #64748b;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 600;
 }
 
 /* Primary Action Buttons */
@@ -640,6 +741,7 @@ QSpinBox {
 }
 
 QCheckBox {
+    background-color: transparent;
     color: #1e293b;
     font-weight: 500;
     spacing: 8px;
@@ -693,6 +795,16 @@ QTabBar::tab:hover:!selected {
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     padding: 6px 12px;
+}
+
+/* ScrollArea Containers */
+QScrollArea {
+    background-color: transparent;
+    border: none;
+}
+
+QScrollArea > QWidget > QWidget {
+    background-color: transparent;
 }
 
 /* Scrollbars */

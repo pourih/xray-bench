@@ -28,13 +28,13 @@ class StatCard(QFrame):
         header_row.setSpacing(8)
 
         self.icon_label = QLabel(icon)
-        self.icon_label.setStyleSheet("font-size: 18px;")
+        self.icon_label.setStyleSheet("background-color: transparent; font-size: 18px;")
         header_row.addWidget(self.icon_label)
 
         self.title_label = QLabel(title.upper())
         self.title_label.setProperty("class", "label-muted")
         self.title_label.setStyleSheet(
-            "font-size: 11px; font-weight: 700; letter-spacing: 0.5px;"
+            "background-color: transparent; font-size: 11px; font-weight: 700; letter-spacing: 0.5px;"
         )
         header_row.addWidget(self.title_label)
         header_row.addStretch()
@@ -45,14 +45,14 @@ class StatCard(QFrame):
         self.value_label = QLabel(value)
         self.value_label.setProperty("class", "stat-value")
         self.value_label.setStyleSheet(
-            "font-size: 26px; font-weight: 800;"
+            "background-color: transparent; font-size: 26px; font-weight: 800;"
         )
         layout.addWidget(self.value_label)
 
         # Subtitle / Badge
         self.badge_label = QLabel(badge)
         self.badge_label.setStyleSheet(
-            "font-size: 11px; font-weight: 500; color: #818cf8;"
+            "background-color: transparent; font-size: 11px; font-weight: 500; color: #818cf8;"
         )
         layout.addWidget(self.badge_label)
 

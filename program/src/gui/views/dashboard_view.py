@@ -88,9 +88,7 @@ class DashboardView(QWidget):
 
         # Live status pill
         self.status_pill = QLabel("IDLE")
-        self.status_pill.setStyleSheet(
-            "background-color: #282a35; color: #9ca3af; border-radius: 6px; padding: 4px 10px; font-size: 11px; font-weight: 700;"
-        )
+        self.status_pill.setObjectName("statusPill")
         deck_title_row.addWidget(self.status_pill)
         deck_title_row.addStretch()
         deck_layout.addLayout(deck_title_row)
@@ -184,7 +182,7 @@ class DashboardView(QWidget):
         stream_header.addWidget(stream_title)
 
         self.lbl_stream_counter = QLabel("0 events")
-        self.lbl_stream_counter.setStyleSheet("color: #6b7280; font-size: 11px;")
+        self.lbl_stream_counter.setObjectName("streamCounter")
         stream_header.addWidget(self.lbl_stream_counter)
         stream_header.addStretch()
 
@@ -244,14 +242,12 @@ class DashboardView(QWidget):
 
         if is_running:
             self.status_pill.setText(status_text)
-            self.status_pill.setStyleSheet(
-                "background-color: #312e81; color: #a5b4fc; border-radius: 6px; padding: 4px 10px; font-size: 11px; font-weight: 700;"
-            )
+            self.status_pill.setProperty("running", "true")
         else:
             self.status_pill.setText("IDLE")
-            self.status_pill.setStyleSheet(
-                "background-color: #282a35; color: #9ca3af; border-radius: 6px; padding: 4px 10px; font-size: 11px; font-weight: 700;"
-            )
+            self.status_pill.setProperty("running", "false")
+        self.status_pill.style().unpolish(self.status_pill)
+        self.status_pill.style().polish(self.status_pill)
 
     def update_active_node(self, current: int, total: int, tag: str, addr: str, port: int, proto: str, mode: str) -> None:
         """Update live testing pill."""

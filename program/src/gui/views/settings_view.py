@@ -147,7 +147,6 @@ class SettingsView(QWidget):
 
         # Google check toggle
         self.chk_google = QCheckBox("Enable Deep Google Exit-IP Localization Check")
-        self.chk_google.setStyleSheet("font-weight: 500;")
         l2.addWidget(self.chk_google)
 
         # HTTP Timeout

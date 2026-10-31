@@ -1,14 +1,22 @@
 # Environment & Secrets
 .env
+.env.*
+!.env.example
 
-# Binary directory
-bin/
+# Binaries and platform downloads
+bin/*
+!bin/.gitkeep
+!bin/README.md
+
+# User Data (subscriptions, custom nodes, blacklists, databases)
+/data/*
+!/data/.gitkeep
+!/data/*.example
 
 # Databases
-data/*.db
-data/*.sqlite
-data/*.bak*
 *.db
+*.sqlite
+*.sqlite3
 *.bak*
 
 # Python & testing
@@ -18,6 +26,8 @@ __pycache__/
 .pytest_cache/
 .coverage
 htmlcov/
+.venv/
+venv/
 
 # Logs & temp
 *.log

@@ -1,0 +1,4 @@
+# Blacklisted fingerprints, hashes, server IPs, or full URIs to discard before testing
+# Lines starting with '#' are ignored.
+# 192.168.1.1
+# badserver.example.com

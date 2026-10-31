@@ -1,0 +1,4 @@
+# Manual proxy URIs (one per line)
+# Supports vmess://, vless://, trojan://, ss://, etc.
+# Lines starting with '#' are ignored.
+# vless://uuid@example.com:443?type=tcp&security=reality&sni=example.com#SampleNode

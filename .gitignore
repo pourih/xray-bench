@@ -30,6 +30,12 @@ program/bin/*
 .coverage
 htmlcov/
 
+# Local user data (subscriptions, nodes, databases)
+/data/
+/program/data/*
+!/program/data/.gitkeep
+!/program/data/*.example
+
 # Local databases & caches
 *.db
 *.sqlite
@@ -37,8 +43,6 @@ htmlcov/
 *.bak*
 *.db-journal
 *.db-wal
-program/data/nodes_cache.db*
-program/data/test_debug.db
 
 # IDEs & Editors
 .vscode/

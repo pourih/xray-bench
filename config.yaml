@@ -1,0 +1,15 @@
+general:
+  theme: dark
+xray:
+  batch_size: 50
+http_test:
+  concurrency: 12
+  timeout_sec: 6.0
+speed_test:
+  concurrency: 4
+  timeout_sec: 10.0
+geo:
+  blocked_google_countries:
+  - IR
+  - RU
+  check_google_country: true

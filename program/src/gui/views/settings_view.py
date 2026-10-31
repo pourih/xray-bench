@@ -68,16 +68,12 @@ class SettingsView(QWidget):
         t0.setProperty("class", "heading-2")
         l0.addWidget(t0)
 
-        r0 = QHBoxLayout()
-        r0.addWidget(QLabel("Interface Theme:"))
         self.combo_theme = QComboBox()
         self.combo_theme.addItem("🌙  Dark Theme", "dark")
         self.combo_theme.addItem("☀️  Light Theme", "light")
-        self.combo_theme.setFixedWidth(180)
+        self.combo_theme.setFixedWidth(200)
         self.combo_theme.currentIndexChanged.connect(self._on_theme_changed)
-        r0.addWidget(self.combo_theme)
-        r0.addStretch()
-        l0.addLayout(r0)
+        l0.addLayout(self._create_setting_row("Interface Theme:", self.combo_theme))
 
         layout.addWidget(c0)
 
@@ -92,35 +88,23 @@ class SettingsView(QWidget):
         t1.setProperty("class", "heading-2")
         l1.addWidget(t1)
 
-        # Batch size
-        r1 = QHBoxLayout()
-        r1.addWidget(QLabel("Xray Batch Size (nodes loaded per core instance):"))
         self.spin_batch = QSpinBox()
         self.spin_batch.setRange(5, 100)
         self.spin_batch.setValue(40)
-        r1.addWidget(self.spin_batch)
-        r1.addStretch()
-        l1.addLayout(r1)
+        self.spin_batch.setFixedWidth(120)
+        l1.addLayout(self._create_setting_row("Xray Batch Size (nodes loaded per core instance):", self.spin_batch))
 
-        # HTTP Concurrency
-        r2 = QHBoxLayout()
-        r2.addWidget(QLabel("HTTP Test Rolling Concurrency (workers):"))
         self.spin_http_conc = QSpinBox()
         self.spin_http_conc.setRange(1, 40)
         self.spin_http_conc.setValue(12)
-        r2.addWidget(self.spin_http_conc)
-        r2.addStretch()
-        l1.addLayout(r2)
+        self.spin_http_conc.setFixedWidth(120)
+        l1.addLayout(self._create_setting_row("HTTP Test Rolling Concurrency (workers):", self.spin_http_conc))
 
-        # Speed Concurrency
-        r3 = QHBoxLayout()
-        r3.addWidget(QLabel("Speed Test Concurrency (concurrent download streams):"))
         self.spin_speed_conc = QSpinBox()
         self.spin_speed_conc.setRange(1, 10)
         self.spin_speed_conc.setValue(4)
-        r3.addWidget(self.spin_speed_conc)
-        r3.addStretch()
-        l1.addLayout(r3)
+        self.spin_speed_conc.setFixedWidth(120)
+        l1.addLayout(self._create_setting_row("Speed Test Concurrency (concurrent download streams):", self.spin_speed_conc))
 
         layout.addWidget(c1)
 
@@ -135,39 +119,25 @@ class SettingsView(QWidget):
         t2.setProperty("class", "heading-2")
         l2.addWidget(t2)
 
-        # Blocked Countries
-        r4 = QHBoxLayout()
-        r4.addWidget(QLabel("Blocked Countries (comma separated ISO codes):"))
         self.input_blocked = QLineEdit()
         self.input_blocked.setPlaceholderText("IR, RU")
-        self.input_blocked.setFixedWidth(160)
-        r4.addWidget(self.input_blocked)
-        r4.addStretch()
-        l2.addLayout(r4)
+        self.input_blocked.setFixedWidth(200)
+        l2.addLayout(self._create_setting_row("Blocked Countries (comma separated ISO codes):", self.input_blocked))
 
-        # Google check toggle
         self.chk_google = QCheckBox("Enable Deep Google Exit-IP Localization Check")
-        l2.addWidget(self.chk_google)
+        l2.addLayout(self._create_setting_row("Google Geo Localization:", self.chk_google))
 
-        # HTTP Timeout
-        r5 = QHBoxLayout()
-        r5.addWidget(QLabel("HTTP Ping Timeout (seconds):"))
         self.spin_http_timeout = QSpinBox()
         self.spin_http_timeout.setRange(1, 30)
         self.spin_http_timeout.setValue(10)
-        r5.addWidget(self.spin_http_timeout)
-        r5.addStretch()
-        l2.addLayout(r5)
+        self.spin_http_timeout.setFixedWidth(120)
+        l2.addLayout(self._create_setting_row("HTTP Ping Timeout (seconds):", self.spin_http_timeout))
 
-        # Speed Timeout
-        r6 = QHBoxLayout()
-        r6.addWidget(QLabel("Speed Measurement Duration (seconds):"))
         self.spin_speed_timeout = QSpinBox()
         self.spin_speed_timeout.setRange(1, 30)
         self.spin_speed_timeout.setValue(5)
-        r6.addWidget(self.spin_speed_timeout)
-        r6.addStretch()
-        l2.addLayout(r6)
+        self.spin_speed_timeout.setFixedWidth(120)
+        l2.addLayout(self._create_setting_row("Speed Measurement Duration (seconds):", self.spin_speed_timeout))
 
         layout.addWidget(c2)
 
@@ -182,20 +152,16 @@ class SettingsView(QWidget):
         t3.setProperty("class", "heading-2")
         l3.addWidget(t3)
 
-        rg1 = QHBoxLayout()
-        rg1.addWidget(QLabel("GitHub Repository (owner/repo):"))
         self.input_repo = QLineEdit()
         self.input_repo.setPlaceholderText("pourih/xray-bench")
-        rg1.addWidget(self.input_repo)
-        l3.addLayout(rg1)
+        self.input_repo.setFixedWidth(320)
+        l3.addLayout(self._create_setting_row("GitHub Repository (owner/repo):", self.input_repo))
 
-        rg2 = QHBoxLayout()
-        rg2.addWidget(QLabel("Personal Access Token (PAT):"))
         self.input_token = QLineEdit()
         self.input_token.setEchoMode(QLineEdit.EchoMode.Password)
         self.input_token.setPlaceholderText("ghp_...")
-        rg2.addWidget(self.input_token)
-        l3.addLayout(rg2)
+        self.input_token.setFixedWidth(320)
+        l3.addLayout(self._create_setting_row("Personal Access Token (PAT):", self.input_token))
 
         layout.addWidget(c3)
         scroll.setWidget(scroll_content)
@@ -213,6 +179,18 @@ class SettingsView(QWidget):
         btn_save.clicked.connect(self.save_settings)
         footer.addWidget(btn_save)
         main_layout.addLayout(footer)
+
+    def _create_setting_row(self, label_text: str, widget: QWidget) -> QHBoxLayout:
+        """Create a consistent form row with fixed-width label to align all inputs into a vertical column."""
+        row = QHBoxLayout()
+        row.setSpacing(16)
+        lbl = QLabel(label_text)
+        lbl.setFixedWidth(360)
+        lbl.setStyleSheet("background-color: transparent;")
+        row.addWidget(lbl)
+        row.addWidget(widget)
+        row.addStretch()
+        return row
 
     def _on_theme_changed(self) -> None:
         """Switch application stylesheet dynamically when theme combobox changes."""

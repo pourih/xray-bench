@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/banner.png" alt="xBench Banner" width="100%">
+</p>
+
 # Xray-Bench (xBench)
 
 A tool for testing, filtering, and ranking large lists of V2Ray/Xray proxy configs. 

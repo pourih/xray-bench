@@ -1,8 +1,10 @@
 """Main application window with sidebar navigation and reactive view switching."""
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Optional
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import (
     QApplication,
     QButtonGroup,
@@ -34,10 +36,25 @@ class MainWindow(QMainWindow):
         self.resize(1180, 760)
         self.setMinimumSize(960, 620)
 
+        # Set Window Icon
+        icon_path = self._resolve_icon_path()
+        if icon_path:
+            self.setWindowIcon(QIcon(str(icon_path)))
+
         self.current_theme = "dark"
         self.worker: Optional[BenchmarkWorker] = None
         self._init_ui()
         self._refresh_db_stats()
+
+    def _resolve_icon_path(self) -> Optional[Path]:
+        """Locate app icon asset file."""
+        base = Path(__file__).resolve().parent.parent.parent
+        candidates = [
+            base.parent / "assets" / "icon.png",
+            base / "assets" / "icon.png",
+            Path("assets/icon.png").resolve(),
+        ]
+        return next((p for p in candidates if p.is_file()), None)
 
     def _init_ui(self) -> None:
         central_widget = QWidget()

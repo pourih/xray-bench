@@ -75,15 +75,15 @@ class MainWindow(QMainWindow):
         brand_container = QWidget()
         brand_container.setStyleSheet("background-color: transparent;")
         brand_layout = QHBoxLayout(brand_container)
-        brand_layout.setContentsMargins(18, 20, 16, 16)
-        brand_layout.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+        brand_layout.setContentsMargins(12, 22, 12, 16)
+        brand_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.brand_title_label = QLabel()
         self.brand_title_label.setObjectName("sidebarTitle")
+        self.brand_title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.brand_title_label.setStyleSheet("background-color: transparent;")
         self._update_brand_title()
         brand_layout.addWidget(self.brand_title_label)
-        brand_layout.addStretch()
 
         sidebar_layout.addWidget(brand_container)
 
@@ -146,8 +146,8 @@ class MainWindow(QMainWindow):
         """Render sidebar logo title with vibrant red 'x' and adaptive 'Bench'."""
         bench_color = "#ffffff" if self.current_theme == "dark" else "#0f172a"
         self.brand_title_label.setText(
-            f'<span style="color:#EF4444; font-size:21px; font-weight:800;">x</span>'
-            f'<span style="color:{bench_color}; font-size:21px; font-weight:800; letter-spacing:-0.5px;">Bench</span>'
+            f'<span style="color:#EF4444; font-size:24px; font-weight:800;">x</span>'
+            f'<span style="color:{bench_color}; font-size:24px; font-weight:800; letter-spacing:-0.5px;">Bench</span>'
         )
 
     def _on_theme_changed(self, theme: str) -> None:

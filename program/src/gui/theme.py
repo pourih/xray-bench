@@ -35,12 +35,13 @@ QMainWindow {
 }
 
 #sidebarTitle {
-    font-size: 21px;
+    font-size: 24px;
     font-weight: 800;
     color: #ffffff;
     background-color: transparent;
     padding: 0px;
     letter-spacing: -0.5px;
+    qproperty-alignment: AlignCenter;
 }
 
 /* Navigation Buttons */
@@ -568,12 +569,13 @@ QMainWindow {
 }
 
 #sidebarTitle {
-    font-size: 21px;
+    font-size: 24px;
     font-weight: 800;
     color: #0f172a;
     background-color: transparent;
     padding: 0px;
     letter-spacing: -0.5px;
+    qproperty-alignment: AlignCenter;
 }
 
 /* Navigation Buttons */

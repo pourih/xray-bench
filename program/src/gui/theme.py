@@ -1,6 +1,16 @@
 """Modern dark and light theme styling and QSS stylesheets for xBench GUI."""
+from pathlib import Path
 
-DARK_STYLESHEET = """
+_ASSETS_DIR = Path(__file__).resolve().parents[3] / "assets"
+_CHECK_ICON = str((_ASSETS_DIR / "check.svg")).replace("\\", "/")
+_CHEVRON_DARK = str((_ASSETS_DIR / "chevron-down-dark.svg")).replace("\\", "/")
+_CHEVRON_LIGHT = str((_ASSETS_DIR / "chevron-down-light.svg")).replace("\\", "/")
+_SPIN_UP_DARK = str((_ASSETS_DIR / "spin-up-dark.svg")).replace("\\", "/")
+_SPIN_DOWN_DARK = str((_ASSETS_DIR / "spin-down-dark.svg")).replace("\\", "/")
+_SPIN_UP_LIGHT = str((_ASSETS_DIR / "spin-up-light.svg")).replace("\\", "/")
+_SPIN_DOWN_LIGHT = str((_ASSETS_DIR / "spin-down-light.svg")).replace("\\", "/")
+
+_RAW_DARK_STYLESHEET = """
 /* Global Reset */
 QWidget {
     background-color: #121316;
@@ -278,11 +288,15 @@ QTableCornerButton::section {
 /* Inputs, TextEdits, ComboBoxes, SpinBoxes */
 QLineEdit, QTextEdit, QPlainTextEdit {
     background-color: #1a1c22;
-    border: 1px solid #2f3240;
+    border: 1px solid #3b3e4f;
     border-radius: 8px;
     padding: 8px 12px;
     color: #ffffff;
     font-size: 13px;
+}
+
+QLineEdit:hover, QTextEdit:hover, QPlainTextEdit:hover {
+    border-color: #4f5266;
 }
 
 QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {
@@ -291,20 +305,33 @@ QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {
 
 QComboBox {
     background-color: #1a1c22;
-    border: 1px solid #2f3240;
+    border: 1px solid #3b3e4f;
     border-radius: 8px;
-    padding: 8px 14px;
+    padding: 8px 32px 8px 14px;
     color: #ffffff;
     font-weight: 500;
 }
 
 QComboBox:hover {
-    border-color: #3f4357;
+    border-color: #4f5266;
+}
+
+QComboBox:focus {
+    border: 1px solid #6366f1;
 }
 
 QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 28px;
     border: none;
-    width: 24px;
+    background: transparent;
+}
+
+QComboBox::down-arrow {
+    image: url("__CHEVRON_DARK__");
+    width: 12px;
+    height: 12px;
 }
 
 QComboBox QAbstractItemView {
@@ -318,11 +345,58 @@ QComboBox QAbstractItemView {
 
 QSpinBox {
     background-color: #1a1c22;
-    border: 1px solid #2f3240;
+    border: 1px solid #3b3e4f;
     border-radius: 8px;
-    padding: 6px 10px;
+    padding: 6px 26px 6px 10px;
     color: #ffffff;
     min-width: 70px;
+}
+
+QSpinBox:hover {
+    border-color: #4f5266;
+}
+
+QSpinBox:focus {
+    border: 1px solid #6366f1;
+}
+
+QSpinBox::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 22px;
+    border-left: 1px solid #2f3240;
+    border-bottom: 1px solid #2f3240;
+    border-top-right-radius: 8px;
+    background-color: #23252d;
+}
+
+QSpinBox::up-button:hover {
+    background-color: #2e303d;
+}
+
+QSpinBox::up-arrow {
+    image: url("__SPIN_UP_DARK__");
+    width: 8px;
+    height: 8px;
+}
+
+QSpinBox::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 22px;
+    border-left: 1px solid #2f3240;
+    border-bottom-right-radius: 8px;
+    background-color: #23252d;
+}
+
+QSpinBox::down-button:hover {
+    background-color: #2e303d;
+}
+
+QSpinBox::down-arrow {
+    image: url("__SPIN_DOWN_DARK__");
+    width: 8px;
+    height: 8px;
 }
 
 QCheckBox {
@@ -336,13 +410,18 @@ QCheckBox::indicator {
     width: 16px;
     height: 16px;
     border-radius: 4px;
-    border: 1px solid #3b3e4f;
+    border: 1px solid #4b4f63;
     background-color: #1a1c22;
+}
+
+QCheckBox::indicator:hover {
+    border-color: #6366f1;
 }
 
 QCheckBox::indicator:checked {
     background-color: #6366f1;
     border-color: #6366f1;
+    image: url("__CHECK_ICON__");
 }
 
 /* Tab Widget */
@@ -434,7 +513,7 @@ QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
 }
 """
 
-LIGHT_STYLESHEET = """
+_RAW_LIGHT_STYLESHEET = """
 /* Global Reset */
 QWidget {
     background-color: #f8fafc;
@@ -720,6 +799,10 @@ QLineEdit, QTextEdit, QPlainTextEdit {
     font-size: 13px;
 }
 
+QLineEdit:hover, QTextEdit:hover, QPlainTextEdit:hover {
+    border-color: #94a3b8;
+}
+
 QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {
     border: 1px solid #4f46e5;
 }
@@ -728,7 +811,7 @@ QComboBox {
     background-color: #ffffff;
     border: 1px solid #cbd5e1;
     border-radius: 8px;
-    padding: 8px 14px;
+    padding: 8px 32px 8px 14px;
     color: #0f172a;
     font-weight: 500;
 }
@@ -737,9 +820,22 @@ QComboBox:hover {
     border-color: #94a3b8;
 }
 
+QComboBox:focus {
+    border: 1px solid #4f46e5;
+}
+
 QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 28px;
     border: none;
-    width: 24px;
+    background: transparent;
+}
+
+QComboBox::down-arrow {
+    image: url("__CHEVRON_LIGHT__");
+    width: 12px;
+    height: 12px;
 }
 
 QComboBox QAbstractItemView {
@@ -755,9 +851,56 @@ QSpinBox {
     background-color: #ffffff;
     border: 1px solid #cbd5e1;
     border-radius: 8px;
-    padding: 6px 10px;
+    padding: 6px 26px 6px 10px;
     color: #0f172a;
     min-width: 70px;
+}
+
+QSpinBox:hover {
+    border-color: #94a3b8;
+}
+
+QSpinBox:focus {
+    border: 1px solid #4f46e5;
+}
+
+QSpinBox::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 22px;
+    border-left: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    border-top-right-radius: 8px;
+    background-color: #f8fafc;
+}
+
+QSpinBox::up-button:hover {
+    background-color: #f1f5f9;
+}
+
+QSpinBox::up-arrow {
+    image: url("__SPIN_UP_LIGHT__");
+    width: 8px;
+    height: 8px;
+}
+
+QSpinBox::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 22px;
+    border-left: 1px solid #e2e8f0;
+    border-bottom-right-radius: 8px;
+    background-color: #f8fafc;
+}
+
+QSpinBox::down-button:hover {
+    background-color: #f1f5f9;
+}
+
+QSpinBox::down-arrow {
+    image: url("__SPIN_DOWN_LIGHT__");
+    width: 8px;
+    height: 8px;
 }
 
 QCheckBox {
@@ -771,13 +914,18 @@ QCheckBox::indicator {
     width: 16px;
     height: 16px;
     border-radius: 4px;
-    border: 1px solid #cbd5e1;
+    border: 1px solid #94a3b8;
     background-color: #ffffff;
+}
+
+QCheckBox::indicator:hover {
+    border-color: #4f46e5;
 }
 
 QCheckBox::indicator:checked {
     background-color: #4f46e5;
     border-color: #4f46e5;
+    image: url("__CHECK_ICON__");
 }
 
 /* Tab Widget */
@@ -868,6 +1016,18 @@ QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
     width: 0px;
 }
 """
+
+DARK_STYLESHEET = _RAW_DARK_STYLESHEET \
+    .replace("__CHECK_ICON__", _CHECK_ICON) \
+    .replace("__CHEVRON_DARK__", _CHEVRON_DARK) \
+    .replace("__SPIN_UP_DARK__", _SPIN_UP_DARK) \
+    .replace("__SPIN_DOWN_DARK__", _SPIN_DOWN_DARK)
+
+LIGHT_STYLESHEET = _RAW_LIGHT_STYLESHEET \
+    .replace("__CHECK_ICON__", _CHECK_ICON) \
+    .replace("__CHEVRON_LIGHT__", _CHEVRON_LIGHT) \
+    .replace("__SPIN_UP_LIGHT__", _SPIN_UP_LIGHT) \
+    .replace("__SPIN_DOWN_LIGHT__", _SPIN_DOWN_LIGHT)
 
 
 def get_stylesheet(theme: str = "dark") -> str:

@@ -50,8 +50,8 @@ class MainWindow(QMainWindow):
         """Locate app icon asset file."""
         base = Path(__file__).resolve().parent.parent.parent
         candidates = [
-            base.parent / "assets" / "icon.png",
             base / "assets" / "icon.png",
+            base.parent / "assets" / "icon.png",
             Path("assets/icon.png").resolve(),
         ]
         return next((p for p in candidates if p.is_file()), None)

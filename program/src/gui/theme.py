@@ -1,7 +1,8 @@
 """Modern dark and light theme styling and QSS stylesheets for xBench GUI."""
 from pathlib import Path
 
-_ASSETS_DIR = Path(__file__).resolve().parents[3] / "assets"
+_PROGRAM_DIR = Path(__file__).resolve().parents[2]
+_ASSETS_DIR = _PROGRAM_DIR / "assets" if (_PROGRAM_DIR / "assets").is_dir() else _PROGRAM_DIR.parent / "assets"
 _CHECK_ICON = str((_ASSETS_DIR / "check.svg")).replace("\\", "/")
 _CHEVRON_DARK = str((_ASSETS_DIR / "chevron-down-dark.svg")).replace("\\", "/")
 _CHEVRON_LIGHT = str((_ASSETS_DIR / "chevron-down-light.svg")).replace("\\", "/")

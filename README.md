@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.png" alt="xBench Banner" width="100%">
+  <img src="program/assets/banner.png" alt="xBench Banner" width="100%">
 </p>
 
 # Xray-Bench (xBench)
@@ -33,30 +33,47 @@ Surviving nodes are renamed with clean tags showing their rank, country flag, IS
 
 ---
 
+## Project Structure
+
+The project root maintains a clean, minimal layout:
+
+```text
+xray-bench/
+├── program/       # Application source code, assets, config, data, tests, and launchers
+├── results/       # Output subscription benchmark files (nodes_http.txt, nodes_speed.txt)
+└── README.md      # Documentation and quickstart guide
+```
+
+---
+
 ## Running It Yourself
 
 Requires **Python 3.9+**. The tool automatically detects your OS and architecture (`Linux`, `Windows`, `macOS` on `x86_64` / `arm64`), downloads the matching official `xray-core` binary on first run, and configures appropriate permissions.
 
 ### Setup
 
+All application files and dependencies live inside `program/`:
+
 ```bash
 git clone https://github.com/pourih/xray-bench.git
-cd xray-bench
+cd xray-bench/program
 python3 -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-pip install -r program/requirements.txt
+pip install -r requirements.txt
 ```
 
 ### 1. Desktop GUI
-You can launch the visual dashboard directly from the project root:
+You can launch the visual dashboard from the `program/` folder:
 
 - **Linux / macOS:**
   ```bash
+  cd program
   ./run_gui.sh
   # or: python run_gui.py
   ```
 - **Windows:**
   ```cmd
+  cd program
   python run_gui.py
   ```
 
@@ -67,9 +84,11 @@ From the app, you can:
 - Tweak timeouts, concurrency, and dark/light themes without touching config files.
 
 ### 2. Command Line (CLI)
-You can run CLI commands from the root folder with `run_cli.py` / `run_cli.sh` (or from inside `program/`):
+CLI commands run directly from inside `program/`:
 
 ```bash
+cd program
+
 # Check database statistics
 python run_cli.py stats
 
@@ -92,13 +111,13 @@ On Linux, you can also use `./run_cli.sh stats`.
 
 ## Configuration & Input Files
 
-Configuration files live inside `program/` (mirrored at root for convenience):
+Everything lives inside the `program/` folder:
 
-- **`program/data/subscriptions.txt`**: Put your subscription URLs here (one per line).
-- **`program/data/custom_nodes.txt`**: Paste raw proxy links (`vless://`, `vmess://`, `trojan://`, `ss://`, etc.) here.
-- **`program/data/blacklist.txt`**: IPs, domains, or hashes you want to ignore.
-- **`program/config.yaml`**: Adjust batch sizes, timeouts, blocked countries, and speed test rounds.
-- **`program/.env`**: Copy `program/.env.example` to `program/.env` and add your `GITHUB_TOKEN` and `GITHUB_REPO` if you want to use the `--push` flag to auto-update your own GitHub repo.
+- **`data/subscriptions.txt`**: Put your subscription URLs here (one per line).
+- **`data/custom_nodes.txt`**: Paste raw proxy links (`vless://`, `vmess://`, `trojan://`, `ss://`, etc.) here.
+- **`data/blacklist.txt`**: IPs, domains, or hashes you want to ignore.
+- **`config.yaml`**: Adjust batch sizes, timeouts, blocked countries, and speed test rounds.
+- **`.env`**: Copy `.env.example` to `.env` and add your `GITHUB_TOKEN` and `GITHUB_REPO` if you want to use the `--push` flag to auto-update your own GitHub repo.
 
 ---
 
@@ -107,7 +126,7 @@ Configuration files live inside `program/` (mirrored at root for convenience):
 This repository includes `.gitattributes` to normalize line endings (`LF`) across Windows and Linux, preventing unstaged newline diffs when switching between operating systems.
 
 - **On Windows:** Edit, test, and push with `git push origin main`.
-- **On Linux (Fedora):** Pull changes with `git pull --rebase` and run tests with `pytest program/tests`.
+- **On Linux (Fedora):** Pull changes with `git pull --rebase` and run tests with `pytest tests`.
 
 ---
 

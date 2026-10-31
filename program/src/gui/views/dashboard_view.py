@@ -8,6 +8,7 @@ from PySide6.QtWidgets import (
     QComboBox,
     QFrame,
     QHBoxLayout,
+    QHeaderView,
     QLabel,
     QLineEdit,
     QProgressBar,
@@ -197,12 +198,25 @@ class DashboardView(QWidget):
         self.stream_table = QTableWidget()
         self.stream_table.setColumnCount(5)
         self.stream_table.setHorizontalHeaderLabels(["Status", "Target / Tag", "Endpoint", "Result / Details", "Time"])
-        self.stream_table.horizontalHeader().setStretchLastSection(False)
-        self.stream_table.horizontalHeader().resizeSection(0, 80)
-        self.stream_table.horizontalHeader().resizeSection(1, 140)
-        self.stream_table.horizontalHeader().resizeSection(2, 210)
-        self.stream_table.horizontalHeader().resizeSection(3, 400)
-        self.stream_table.horizontalHeader().resizeSection(4, 90)
+        header = self.stream_table.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.ResizeMode.Fixed)
+        header.resizeSection(0, 85)
+        header.setSectionResizeMode(1, QHeaderView.ResizeMode.Interactive)
+        header.resizeSection(1, 140)
+        header.setSectionResizeMode(2, QHeaderView.ResizeMode.Stretch)
+        header.setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)
+        header.setSectionResizeMode(4, QHeaderView.ResizeMode.Fixed)
+        header.resizeSection(4, 90)
+        header.setStretchLastSection(False)
+
+        for col_idx in range(5):
+            h_item = self.stream_table.horizontalHeaderItem(col_idx)
+            if h_item:
+                if col_idx in (0, 4):
+                    h_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                else:
+                    h_item.setTextAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+
         self.stream_table.verticalHeader().setVisible(False)
         self.stream_table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
         self.stream_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
@@ -265,6 +279,7 @@ class DashboardView(QWidget):
         self.stream_table.insertRow(row)
 
         status_item = QTableWidgetItem(status)
+        status_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
         if "✓" in status or "PASS" in status.upper():
             status_item.setForeground(Qt.GlobalColor.green)
         elif "✗" in status or "FAIL" in status.upper() or "DROP" in status.upper():
@@ -272,11 +287,20 @@ class DashboardView(QWidget):
         elif "ELIM" in status.upper():
             status_item.setForeground(Qt.GlobalColor.yellow)
 
+        tag_item = QTableWidgetItem(tag)
+        tag_item.setTextAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+        endpoint_item = QTableWidgetItem(endpoint)
+        endpoint_item.setTextAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+        details_item = QTableWidgetItem(details)
+        details_item.setTextAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+        time_item = QTableWidgetItem(time.strftime("%H:%M:%S"))
+        time_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+
         self.stream_table.setItem(row, 0, status_item)
-        self.stream_table.setItem(row, 1, QTableWidgetItem(tag))
-        self.stream_table.setItem(row, 2, QTableWidgetItem(endpoint))
-        self.stream_table.setItem(row, 3, QTableWidgetItem(details))
-        self.stream_table.setItem(row, 4, QTableWidgetItem(time.strftime("%H:%M:%S")))
+        self.stream_table.setItem(row, 1, tag_item)
+        self.stream_table.setItem(row, 2, endpoint_item)
+        self.stream_table.setItem(row, 3, details_item)
+        self.stream_table.setItem(row, 4, time_item)
 
         # Scroll to bottom
         self.stream_table.scrollToBottom()

@@ -101,17 +101,33 @@ class NodesView(QWidget):
             "Points",
             "Copy",
         ])
-        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Interactive)
-        self.table.horizontalHeader().setStretchLastSection(False)
-        self.table.horizontalHeader().resizeSection(0, 110)
-        self.table.horizontalHeader().resizeSection(1, 140)
-        self.table.horizontalHeader().resizeSection(2, 90)
-        self.table.horizontalHeader().resizeSection(3, 190)
-        self.table.horizontalHeader().resizeSection(4, 180)
-        self.table.horizontalHeader().resizeSection(5, 90)
-        self.table.horizontalHeader().resizeSection(6, 100)
-        self.table.horizontalHeader().resizeSection(7, 80)
-        self.table.horizontalHeader().resizeSection(8, 90)
+        header = self.table.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.ResizeMode.Interactive)
+        header.resizeSection(0, 115)
+        header.setSectionResizeMode(1, QHeaderView.ResizeMode.Interactive)
+        header.resizeSection(1, 150)
+        header.setSectionResizeMode(2, QHeaderView.ResizeMode.Interactive)
+        header.resizeSection(2, 90)
+        header.setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)
+        header.setSectionResizeMode(4, QHeaderView.ResizeMode.Stretch)
+        header.setSectionResizeMode(5, QHeaderView.ResizeMode.Interactive)
+        header.resizeSection(5, 95)
+        header.setSectionResizeMode(6, QHeaderView.ResizeMode.Interactive)
+        header.resizeSection(6, 105)
+        header.setSectionResizeMode(7, QHeaderView.ResizeMode.Interactive)
+        header.resizeSection(7, 85)
+        header.setSectionResizeMode(8, QHeaderView.ResizeMode.Fixed)
+        header.resizeSection(8, 90)
+        header.setStretchLastSection(False)
+
+        for col_idx in range(9):
+            h_item = self.table.horizontalHeaderItem(col_idx)
+            if h_item:
+                if col_idx in (7, 8):
+                    h_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                else:
+                    h_item.setTextAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+
         self.table.verticalHeader().setDefaultSectionSize(46)
         self.table.verticalHeader().setMinimumSectionSize(46)
         self.table.verticalHeader().setVisible(False)
@@ -167,14 +183,37 @@ class NodesView(QWidget):
             # Speed display
             spd_str = f"{r.last_speed_mbps:.2f} Mbps" if r.last_speed_mbps and r.last_speed_mbps > 0 else "--"
 
-            self.table.setItem(row_idx, 0, QTableWidgetItem(tag))
-            self.table.setItem(row_idx, 1, QTableWidgetItem(loc_str))
-            self.table.setItem(row_idx, 2, QTableWidgetItem(r.protocol.upper()))
-            self.table.setItem(row_idx, 3, QTableWidgetItem(f"{r.server_address}:{r.port}"))
-            self.table.setItem(row_idx, 4, QTableWidgetItem(r.isp or "Unknown"))
-            self.table.setItem(row_idx, 5, QTableWidgetItem(lat_str))
-            self.table.setItem(row_idx, 6, QTableWidgetItem(spd_str))
-            self.table.setItem(row_idx, 7, QTableWidgetItem(f"{r.cumulative_score}pts"))
+            item_tag = QTableWidgetItem(tag)
+            item_tag.setTextAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+            self.table.setItem(row_idx, 0, item_tag)
+
+            item_loc = QTableWidgetItem(loc_str)
+            item_loc.setTextAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+            self.table.setItem(row_idx, 1, item_loc)
+
+            item_proto = QTableWidgetItem(r.protocol.upper())
+            item_proto.setTextAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+            self.table.setItem(row_idx, 2, item_proto)
+
+            item_host = QTableWidgetItem(f"{r.server_address}:{r.port}")
+            item_host.setTextAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+            self.table.setItem(row_idx, 3, item_host)
+
+            item_isp = QTableWidgetItem(r.isp or "Unknown")
+            item_isp.setTextAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+            self.table.setItem(row_idx, 4, item_isp)
+
+            item_lat = QTableWidgetItem(lat_str)
+            item_lat.setTextAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+            self.table.setItem(row_idx, 5, item_lat)
+
+            item_spd = QTableWidgetItem(spd_str)
+            item_spd.setTextAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+            self.table.setItem(row_idx, 6, item_spd)
+
+            item_pts = QTableWidgetItem(f"{r.cumulative_score}pts")
+            item_pts.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            self.table.setItem(row_idx, 7, item_pts)
             self.table.setRowHeight(row_idx, 46)
 
             # Copy button inside centered container with zero vertical clipping

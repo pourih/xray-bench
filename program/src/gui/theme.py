@@ -255,6 +255,11 @@ QTableWidget::item:selected {
     color: #ffffff;
 }
 
+QHeaderView {
+    background-color: #1e2027;
+    border: none;
+}
+
 QHeaderView::section {
     background-color: #1e2027;
     color: #9ca3af;
@@ -263,6 +268,11 @@ QHeaderView::section {
     padding: 8px 12px;
     border: none;
     border-bottom: 1px solid #282a35;
+}
+
+QTableCornerButton::section {
+    background-color: #1e2027;
+    border: none;
 }
 
 /* Inputs, TextEdits, ComboBoxes, SpinBoxes */
@@ -680,6 +690,11 @@ QTableWidget::item:selected {
     color: #1e1b4b;
 }
 
+QHeaderView {
+    background-color: #f8fafc;
+    border: none;
+}
+
 QHeaderView::section {
     background-color: #f8fafc;
     color: #64748b;
@@ -688,6 +703,11 @@ QHeaderView::section {
     padding: 8px 12px;
     border: none;
     border-bottom: 1px solid #e2e8f0;
+}
+
+QTableCornerButton::section {
+    background-color: #f8fafc;
+    border: none;
 }
 
 /* Inputs, TextEdits, ComboBoxes, SpinBoxes */
